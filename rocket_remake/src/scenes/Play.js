@@ -50,25 +50,43 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        this.starfield.tilePositionX -=4;
+        this.starfield.tilePositionX -=4;   //The background sprite moving to the left
 
-        this.p1Rocket.update();
+        this.p1Rocket.update();             //the constant updating of player rocket
         
+        //Updating of all ships, allows them to move left on screen
         this.ship1.update();
         this.ship2.update();
         this.ship3.update();
 
-        this.checkCollision(this.p1Rocket, this.ship1);
-        this.checkCollision(this.p1Rocket, this.ship2);
-        this.checkCollision(this.p1Rocket, this.ship3);
+        //this.checkCollision(this.p1Rocket, this.ship1);
+        //this.checkCollision(this.p1Rocket, this.ship2);
+        //this.checkCollision(this.p1Rocket, this.ship3);
+
+        //Calls on checkCollision to check if collison occurs if true
+        if(this.checkCollision(this.p1Rocket, this.ship3)) {
+            this.p1Rocket.reset();  //rocket reset to bottom of screen
+            this.ship3.reset();     //ship reset to right of screen
+        }
+
+        if(this.checkCollision(this.p1Rocket, this.ship2)) {
+            this.p1Rocket.reset();
+            this.ship2.reset();
+        }
+
+        if(this.checkCollision(this.p1Rocket, this.ship1)) {
+            this.p1Rocket.reset();
+            this.ship1.reset();
+        }
 
     }
 
+    //collision method
     checkCollision(rocket, ship) {
-        if(rocket.x + rocket.width > ship.x && 
-            rocket.x < ship.x + ship.width && 
-            rocket.y > rocket.height + ship.y && 
-            rocket.y < ship.y + ship.height){
+        if(rocket.x < ship.x + ship.width && 
+            rocket.x + rocket.width > ship.x && 
+            rocket.y < ship.y + ship.height &&
+            rocket.height + rocket.y > ship. y){
                 ship.alpha = 0;
                 rocket.reset();
                 ship.reset();
