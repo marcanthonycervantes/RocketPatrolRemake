@@ -56,6 +56,18 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
+        //initializes player scores
+        this.p1Score = 0;
+
+        //displays score
+        let scoreConfig = {fontFamily: 'Courier', fontSize: '28px', backgroundColor: '#F3B141', color: '#843605', 
+        align: 'right',
+        padding: {top: 5, bottom: 5}, fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, 
+            borderUISize + borderPadding * 2, 
+            this.p1Score, scoreConfig);
+
     }
 
     update() {
@@ -90,14 +102,15 @@ class Play extends Phaser.Scene {
 
     //collision method
     checkCollision(rocket, ship) {
-        if(rocket.x < ship.x + ship.width && 
+        // simple AABB checking
+        if (rocket.x < ship.x + ship.width && 
             rocket.x + rocket.width > ship.x && 
             rocket.y < ship.y + ship.height &&
-            rocket.height + rocket.y > ship. y){
-                ship.alpha = 0;
-                rocket.reset();
-                ship.reset();
-            }
+            rocket.height + rocket.y > ship. y) {
+                return true;
+        } else {
+            return false;
+        }
     }
 
     shipExplode(ship) {
@@ -110,7 +123,10 @@ class Play extends Phaser.Scene {
           ship.reset();                         // reset ship position
           ship.alpha = 1;                       // make ship visible again
           boom.destroy();                       // remove explosion sprite
-        });       
+        });
+        //score adding and repaint
+        this.p1Score += ship.points;
+        this.scoreLeft.text = this.p1Score;   
       }
 
 }
