@@ -68,17 +68,35 @@ class Play extends Phaser.Scene {
             borderUISize + borderPadding * 2, 
             this.p1Score, scoreConfig);
 
+        //GAME OVER flag
+        this.gameOver = false;
+
+        // 60-second play clock
+        scoreConfig.fixedWidth = 0;
+        this.clock = this.time.delayedCall(60000, () => {
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart', scoreConfig).setOrigin(0.5);
+            this.gameOver = true;
+        }, null, this);
+
     }
 
     update() {
+        //check key input for restart (if they press 'R')
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.scene.restart();
+        }
+
         this.starfield.tilePositionX -=4;   //The background sprite moving to the left
 
-        this.p1Rocket.update();             //the constant updating of player rocket
+        if (!this.gameOver) {
+            this.p1Rocket.update();             //the constant updating of player rocket
         
-        //Updating of all ships, allows them to move left on screen
-        this.ship1.update();
-        this.ship2.update();
-        this.ship3.update();
+            //Updating of all ships, allows them to move left on screen
+            this.ship1.update();
+            this.ship2.update();
+            this.ship3.update();
+        }
 
         //this.checkCollision(this.p1Rocket, this.ship1);
         //this.checkCollision(this.p1Rocket, this.ship2);
