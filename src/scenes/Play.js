@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.load.image('rocket', 'assets/new_rocket.png');
         //load spritesheet
         this.load.spritesheet('gold', 'assets/new_spaceship2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 8});
-        this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 64, frameHeight: 32, startFrame: 1, endFrame: 3});
+        this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 2});
         this.load.spritesheet('explosion', 'assets/new_explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 18});
     }
 
@@ -62,9 +62,15 @@ class Play extends Phaser.Scene {
         this.anims.create({
             key: 'woosh',
             repeat: -1,
-            frameRate: 30,
-            frames: this.anims.generateFrameNumbers('spaceship', {start: 1, end: 3})
+            frameRate: 15,
+            frames: this.anims.generateFrameNumbers('spaceship', {start: 0, end: 2, first: 0})
         });
+
+        this.ship1.anims.play('woosh');
+
+        this.ship2.anims.play('woosh');
+
+        this.ship3.anims.play('woosh');
 
         //initializes player scores
         this.p1Score = 0;
@@ -166,4 +172,5 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion')
       }
+
 }
