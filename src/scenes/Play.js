@@ -4,11 +4,11 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('starfield', 'assets/starfield.png');
-        this.load.image('rocket', 'assets/rocket.png');
-        this.load.image('spaceship', 'assets/spaceship.png');
+        this.load.image('starfield', 'assets/new_starfield.png');
+        this.load.image('rocket', 'assets/new_rocket.png');
         //load spritesheet
-        this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 64, frameHeight: 32, startFrame: 1, endFrame: 3});
+        this.load.spritesheet('explosion', 'assets/new_explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 18});
     }
 
     create() {
@@ -26,6 +26,8 @@ class Play extends Phaser.Scene {
         this.ship1 = new Ship (
             this, 100, 200, 'spaceship'
         );
+
+        this.ship1.play('woosh');
 
         this.ship2 = new Ship (
             this, 300, 240, 'spaceship'
@@ -52,8 +54,15 @@ class Play extends Phaser.Scene {
         //animation configuration
         this.anims.create({
             key: 'explode',
-            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
+            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 18, first: 0}),
             frameRate: 30
+        });
+
+        this.anims.create({
+            key: 'woosh',
+            repeat: -1,
+            frameRate: 30,
+            frames: this.anims.generateFrameNumbers('spaceship', {start: 1, end: 3})
         });
 
         //initializes player scores
@@ -150,5 +159,4 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion')
       }
-
 }
