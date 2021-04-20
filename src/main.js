@@ -15,3 +15,17 @@ let keyLEFT, keyRIGHT, keyF, keyR;
 let highScore = 0;
 
 //For modding the original game, it has taken me more than 10 hours
+
+//Points Breakdown:
+//Starting Tier 
+//- Track a high score that persists across scenes and display it in the UI (5)
+//- Implement the speed increase that happens after 30 seconds in the original game (5)
+//- Create a new scrolling tile sprite for the background (5)
+//Novice Tier
+//- Display the time remaining (in seconds) on the screen (10)
+//- Create a new animated sprite for the Spaceship enemies (10)
+//- Implement parallax scrolling (10)
+//Intermediate Tier
+//- Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (20)
+//- Create new artwork for all of the in-game assets (rocket, spaceships, explosion) (20)
+//- Implement a new timing/scoring mechanism that adds time to the clock for successful hits (20)

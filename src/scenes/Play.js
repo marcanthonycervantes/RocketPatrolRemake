@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.image('starfield', 'assets/new_starfield.png');
+        this.load.image('planet', 'assets/planet1.png');
         this.load.image('rocket', 'assets/new_rocket.png');
         //load spritesheet
         this.load.spritesheet('gold', 'assets/new_spaceship2.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 7});
@@ -15,6 +16,8 @@ class Play extends Phaser.Scene {
     create() {
 
         this.starfield = this.add.tileSprite(0,0,640,480, 'starfield').setOrigin(0,0);
+
+        this.planet = this.add.tileSprite(0,0,64,32, 'planet').setOrigin(0,0);
 
         this.p1Rocket = new Rocket(this, 
             game.config.width/2, 
@@ -110,9 +113,26 @@ class Play extends Phaser.Scene {
 
 
         //displays clock
+        this.displayClock = this.add.text(borderUISize + borderPadding + 200, 
+            borderUISize + borderPadding * 2, 
+            'Time', 
+            scoreConfig);
+
+        this.displaySec = this.add.text(borderUISize + borderPadding + 250, 
+            borderUISize + borderPadding * 2, 
+            game.settings.gameTimer / 1000, 
+            scoreConfig);
 
         //GAME OVER flag
         this.gameOver = false;
+
+        //After 30 sec, increase movespeed
+        this.clock = this.time.delayedCall(30000, () => {
+            this.ship1.moveSpeedFast();
+            this.ship2.moveSpeedFast();
+            this.ship3.moveSpeedFast();
+            this.goldShip.moveSpeedFast();
+        }, null, this);
 
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
@@ -123,13 +143,6 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
-        }, null, this);
-
-        this.clock = this.time.delayedCall(30000, () => {
-            this.ship1.moveSpeedFast();
-            this.ship2.moveSpeedFast();
-            this.ship3.moveSpeedFast();
-            this.goldShip.moveSpeedFast();
         }, null, this);
 
     }
@@ -144,6 +157,8 @@ class Play extends Phaser.Scene {
         }
 
         this.starfield.tilePositionX -=4;   //The background sprite moving to the left
+
+        this.planet.tilePositionX -= 2
 
         if (!this.gameOver) {
             this.p1Rocket.update();             //the constant updating of player rocket
@@ -177,6 +192,8 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.goldShip);
         }
+
+        this.displaySec.setText((1 - this.clock.getProgress()) * (game.settings.gameTimer / 1000));
 
     }
 
