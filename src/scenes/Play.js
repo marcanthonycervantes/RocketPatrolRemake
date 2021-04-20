@@ -111,14 +111,15 @@ class Play extends Phaser.Scene {
             'Highscore', 
             scoreConfig);
 
-
         //displays clock
-        this.displayClock = this.add.text(borderUISize + borderPadding + 200, 
+        this.displayClock = this.add.text(borderUISize + borderPadding + 125, 
             borderUISize + borderPadding * 2, 
-            'Time', 
+            'Time: ', 
             scoreConfig);
 
-        this.displaySec = this.add.text(borderUISize + borderPadding + 250, 
+        scoreConfig.fixedWidth = 40;
+
+        this.displaySec = this.add.text(borderUISize + borderPadding + 210, 
             borderUISize + borderPadding * 2, 
             game.settings.gameTimer / 1000, 
             scoreConfig);
