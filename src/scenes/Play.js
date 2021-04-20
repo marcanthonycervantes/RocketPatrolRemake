@@ -7,8 +7,8 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', 'assets/new_starfield.png');
         this.load.image('rocket', 'assets/new_rocket.png');
         //load spritesheet
-        this.load.spritesheet('gold', 'assets/new_spaceship2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 8});
-        this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 2});
+        this.load.spritesheet('gold', 'assets/new_spaceship2.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 7});
+        this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 2});
         this.load.spritesheet('explosion', 'assets/new_explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 18});
     }
 
@@ -61,9 +61,16 @@ class Play extends Phaser.Scene {
 
         this.anims.create({
             key: 'woosh',
+            frames: this.anims.generateFrameNumbers('spaceship', {start: 0, end: 2, first: 0}),
+            frameRate: 30,
             repeat: -1,
-            frameRate: 15,
-            frames: this.anims.generateFrameNumbers('spaceship', {start: 0, end: 2, first: 0})
+        });
+
+        this.anims.create({
+            key: 'goldWoosh',
+            frames: this.anims.generateFrameNumbers('gold', {start: 0, end: 7, first: 0}),
+            frameRate: 30,
+            repeat: -1,
         });
 
         this.ship1.anims.play('woosh');
@@ -71,6 +78,8 @@ class Play extends Phaser.Scene {
         this.ship2.anims.play('woosh');
 
         this.ship3.anims.play('woosh');
+
+        this.goldShip.anims.play('goldWoosh');
 
         //initializes player scores
         this.p1Score = 0;
@@ -84,12 +93,22 @@ class Play extends Phaser.Scene {
             borderUISize + borderPadding * 2, 
             this.p1Score, scoreConfig);
 
+        this.scoreRight = this.add.text(game.config.width - borderUISize - borderPadding - this.scoreConfig.fixedWidth, 
+            borderUISize + borderPadding * 2, 
+            highScore, scoreConfig);
+
+
+        //displays clock
+
         //GAME OVER flag
         this.gameOver = false;
 
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
+            if(this.p1Score > highScore){
+                highScore = this.p1Score;
+            }
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
