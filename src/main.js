@@ -13,3 +13,5 @@ let borderPadding = borderUISize / 3;
 let keyLEFT, keyRIGHT, keyF, keyR;
 
 let highScore = 0;
+
+//For modding the original game, it has taken me more than 10 hours

@@ -20,4 +20,8 @@ class Gold extends Phaser.GameObjects.Sprite {
         this.x = game.config.width + 50;
         this.alpha = 1;
     }
+
+    moveSpeedFast() {
+        this.moveSpeed += 1;
+    }
 }

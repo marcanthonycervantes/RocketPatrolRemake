@@ -125,6 +125,13 @@ class Play extends Phaser.Scene {
             this.gameOver = true;
         }, null, this);
 
+        this.clock = this.time.delayedCall(30000, () => {
+            this.ship1.moveSpeedFast();
+            this.ship2.moveSpeedFast();
+            this.ship3.moveSpeedFast();
+            this.goldShip.moveSpeedFast();
+        }, null, this);
+
     }
 
     update() {
