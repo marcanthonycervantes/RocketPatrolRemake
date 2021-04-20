@@ -12,4 +12,4 @@ let borderPadding = borderUISize / 3;
 
 let keyLEFT, keyRIGHT, keyF, keyR;
 
-let highScore;
+let highScore = 0;
