@@ -73,6 +73,7 @@ class Play extends Phaser.Scene {
             repeat: -1,
         });
 
+        //play all sprite animations on space ships
         this.ship1.anims.play('woosh');
 
         this.ship2.anims.play('woosh');
@@ -89,13 +90,23 @@ class Play extends Phaser.Scene {
         align: 'right',
         padding: {top: 5, bottom: 5}, fixedWidth: 100
         }
+        //score box on left side
         this.scoreLeft = this.add.text(borderUISize + borderPadding, 
             borderUISize + borderPadding * 2, 
             this.p1Score, scoreConfig);
-
+        
+        //Highscore box on right side
         this.scoreRight = this.add.text(game.config.width - borderUISize - borderPadding - scoreConfig.fixedWidth, 
             borderUISize + borderPadding * 2, 
             highScore, scoreConfig);
+
+        scoreConfig.fixedWidth = 0;
+        
+        //display for Highscore also on right side
+        this.displayHS = this.add.text(game.config.width - borderUISize - borderPadding - scoreConfig.fixedWidth * 2 - 225, 
+            borderUISize + borderPadding * 2, 
+            'Highscore', 
+            scoreConfig);
 
 
         //displays clock
