@@ -5,7 +5,7 @@ class Menu extends Phaser.Scene {
 
     preload(){
         //loads the title sprite for the menu screen
-        this.load.spritesheet('titleSprite', 'assets/rocket_title.png', {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 6});
+        this.load.spritesheet('titleSprite', './assets/rocket_title.png', {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 6});
 
         //loads the audio for whole game
         this.load.audio('sfx_select', 'assets/blip_select12.wav');
@@ -28,7 +28,7 @@ class Menu extends Phaser.Scene {
             repeat: -1,
         });
 
-        //this.rocketTitle.anims.play('rTitle');
+        this.rocketTitle.anims.play('rTitle');
 
         //menu text config
         let menuConfig = {fontFamily: 'Courier', fontSize: '28px', backgroundColor: '#810000', color: '#eeebdd', 

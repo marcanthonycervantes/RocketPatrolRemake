@@ -88,6 +88,12 @@ class Play extends Phaser.Scene {
 
         this.goldShip.anims.play('goldWoosh');
 
+        this.sound1 = this.sound.add('sfx_explosion1');
+        this.sound2 = this.sound.add('sfx_explosion2');
+        this.sound3 = this.sound.add('sfx_explosion3');
+        this.sound4 = this.sound.add('sfx_explosion4');
+
+
         //initializes player scores
         this.p1Score = 0;
 
@@ -236,16 +242,13 @@ class Play extends Phaser.Scene {
       //randomly picks a single sfx to use in shipExplode
     getSFX() {
         //array of sfx
-        this.sfxList = new Array(this.sound.play('sfx_explosion1'), 
-        this.sound.play('sfx_explosion2'), 
-        this.sound.play('sfx_explosion3'), 
-        this.sound.play('sfx_explosion4'));
+        this.sfxList = new Array(this.sound1, this.sound2, this.sound3, this.sound4);
 
         this.randomSFX = Math.floor(Math.random() * this.sfxList.length);
 
         this.item = this.sfxList[this.randomSFX];
 
-        return this.item;
+        this.item.play();
       }
 
 }
