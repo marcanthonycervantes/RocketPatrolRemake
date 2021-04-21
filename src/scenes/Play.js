@@ -18,7 +18,7 @@ class Play extends Phaser.Scene {
 
         this.starfield = this.add.tileSprite(0,0,640,480, 'starfield').setOrigin(0,0);
 
-        this.planet = this.add.tileSprite(100, 200, 64, 32).setOrigin(0,0);    //Not working still
+        this.planet = this.add.sprite(100, 200, 64, 32).setOrigin(0,0);    //Not working still
 
         this.asteroids = this.add.tileSprite(0, 0, 640, 480, 'asteroids').setOrigin(0,0);
 
