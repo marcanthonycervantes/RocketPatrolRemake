@@ -5,7 +5,7 @@ class Play extends Phaser.Scene {
 
     preload() {
         this.load.image('starfield', 'assets/new_starfield.png');
-        this.load.image('planet', 'assets/planet1.png');
+        this.load.image('planet', 'assets/planet2.png');
         this.load.image('rocket', 'assets/new_rocket.png');
         this.load.image('asteroids', 'assets/asteroids.png');
         //load spritesheet
@@ -18,7 +18,7 @@ class Play extends Phaser.Scene {
 
         this.starfield = this.add.tileSprite(0,0,640,480, 'starfield').setOrigin(0,0);
 
-        this.planet = this.add.sprite(100, 200, 64, 32).setOrigin(0,0);    //Not working still
+        this.planet = this.add.tileSprite(0, 0, 640, 480, 'planet').setOrigin(0,0);    //Not working still
 
         this.asteroids = this.add.tileSprite(0, 0, 640, 480, 'asteroids').setOrigin(0,0);
 
@@ -160,7 +160,7 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
-        this.starfield.tilePositionX -=4;   //The background sprite moving to the left
+        this.starfield.tilePositionX -=3;   //The background sprite moving to the left
 
         this.planet.tilePositionX -= 1;     //The planet sprite moves to the left
 
