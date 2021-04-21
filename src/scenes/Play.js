@@ -230,7 +230,22 @@ class Play extends Phaser.Scene {
         //score adding and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion')
+        this.getSFX();
+      }
+
+      //randomly picks a single sfx to use in shipExplode
+    getSFX() {
+        //array of sfx
+        this.sfxList = new Array(this.sound.play('sfx_explosion1'), 
+        this.sound.play('sfx_explosion2'), 
+        this.sound.play('sfx_explosion3'), 
+        this.sound.play('sfx_explosion4'));
+
+        this.randomSFX = Math.floor(Math.random() * this.sfxList.length);
+
+        this.item = this.sfxList[this.randomSFX];
+
+        return this.item;
       }
 
 }
