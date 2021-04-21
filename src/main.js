@@ -14,7 +14,10 @@ let keyLEFT, keyRIGHT, keyF, keyR;
 
 let highScore = 0;
 
-//For modding the original game, it has taken me more than 10 hours
+//For modding the original game, it has taken me more than 15 hours. 
+//Marc Anthony Cervantes
+//April 21 2021
+//Rocket Patrol Moding
 
 //Points Breakdown:
 //Starting Tier 
@@ -30,3 +33,6 @@ let highScore = 0;
 //Intermediate Tier
 //- Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (20)
 //- Create new artwork for all of the in-game assets (rocket, spaceships, explosion) (20)
+
+//Help recieved:
+//A lot of this was possible with help from my friend: Nanxiang Wang
