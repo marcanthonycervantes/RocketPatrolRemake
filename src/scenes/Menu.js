@@ -19,12 +19,12 @@ class Menu extends Phaser.Scene {
 
     create() {
         //
-        this.rocketTitle = this.add.tileSprite(game.config.width / 2, game.config.height / 4, 640, 480, 'titleSprite');
+        this.rocketTitle = this.add.sprite(game.config.width / 2, game.config.height / 4, 640, 480, 'titleSprite');
 
         this.anims.create({
             key: 'rTitle',
             frames: this.anims.generateFrameNumbers('titleSprite', {start: 0, end: 6, first: 0}),
-            frameRate: 30,
+            frameRate: 7,
             repeat: -1,
         });
 
