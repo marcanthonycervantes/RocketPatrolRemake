@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', 'assets/new_starfield.png');
         this.load.image('planet', 'assets/planet1.png');
         this.load.image('rocket', 'assets/new_rocket.png');
+        this.load.image('asteroids', 'assets/asteroids.png');
         //load spritesheet
         this.load.spritesheet('gold', 'assets/new_spaceship2.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 7});
         this.load.spritesheet('spaceship', 'assets/new_spaceship.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 2});
@@ -17,7 +18,9 @@ class Play extends Phaser.Scene {
 
         this.starfield = this.add.tileSprite(0,0,640,480, 'starfield').setOrigin(0,0);
 
-        this.planet = this.add.tileSprite(0,0,64,32, 'planet').setOrigin(0,0);
+        this.planet = this.add.tileSprite(100, 200, 64, 32).setOrigin(0,0);    //Not working still
+
+        this.asteroids = this.add.tileSprite(0, 0, 640, 480, 'asteroids').setOrigin(0,0);
 
         this.p1Rocket = new Rocket(this, 
             game.config.width/2, 
@@ -159,7 +162,9 @@ class Play extends Phaser.Scene {
 
         this.starfield.tilePositionX -=4;   //The background sprite moving to the left
 
-        this.planet.tilePositionX -= 2
+        this.planet.tilePositionX -= 1;     //The planet sprite moves to the left
+
+        this.asteroids.tilePositionX -= 2;
 
         if (!this.gameOver) {
             this.p1Rocket.update();             //the constant updating of player rocket
